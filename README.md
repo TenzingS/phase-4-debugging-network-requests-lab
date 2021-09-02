@@ -62,12 +62,18 @@ developing your own process.
 
 - Add a new toy when the toy form is submitted
 
-  - How I debugged:
+  - How I debugged: After entering a new toy, saw that it was an Internal Server Error, meaning we needed to check someothing in our backend logs. When checked, we see that it's a 
+  Name Error (uninitialized constant ToysController::Toys):
+  app/controllers/toys_controller.rb:10:in `create'
+
+  So we went to our create method in our ToysController and we see that instead of Toy.create it was Toys.create.
+
+  Fixed it by making it Toy.create.
 
 - Update the number of likes for a toy
 
-  - How I debugged:
+  - How I debugged: Error said it had something to do with our React ToyCard fetch for the likes section. But there was nothing wrong there, so went ot check my backend code in controllers for patch(:update) and sure enough it didn't have a render json: toy there. Added it to fix this.
 
 - Donate a toy to Goodwill (and delete it from our database)
 
-  - How I debugged:
+  - How I debugged: Added a :destroy to our routes.rb
